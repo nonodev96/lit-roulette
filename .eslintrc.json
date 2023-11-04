@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "lines-between-class-members": [
+      "off"
+    ],
+    "key-spacing": [
+      "error",
+      {
+        "align": {
+          "beforeColon": true,
+          "afterColon": true,
+          "on": "colon"
+        }
+      }
+    ]
+  }
+}
