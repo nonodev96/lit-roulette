@@ -1,47 +1,196 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang='en-GB'>
 
 <head>
   <title>Lit Roulette</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
 
-  <meta charset="utf-8">
+  <meta charset='utf-8'>
   <style>
-    body {
-      background: #fafafa;
-    }
+      body {
+          background: #fafafa;
+      }
   </style>
+
 </head>
 
 <body>
-  <div id="demo"></div>
+<div id='demo0'></div>
+<div id='demo1'></div>
+<div id='demo2'></div>
 
-  <script type="module">
-    import { html, render } from 'lit';
-    import '../dist/src/lit-roulette.js';
+<script type='module'>
+  import { html, render } from 'lit';
+  import { ref, createRef } from 'lit/directives/ref.js';
+  import '../dist/src/lit-roulette.js';
 
-    /**
-     * @typedef {Object} Item_t
-     * @property {number} id
-     * @property {string} background
-     * @property {string} textColor
-     * @property {string} htmlContent
-     */
-    const items = /** @type Item_t */[
-      { id: 1, background: "#F00", textColor: "#F00", htmlContent: "GG" },
-      { id: 2, background: "#0F0", textColor: "#F00", htmlContent: "GG" },
-      { id: 3, background: "#00F", textColor: "#F00", htmlContent: "GG" },
-      { id: 4, background: "#FFF", textColor: "#F00", htmlContent: "GG" },
-    ];
-    render(
-      html`
-        <lit-roulette .items=${items}>
-          some light-dom
-        </lit-roulette>
-      `,
-      document.querySelector('#demo')
-    );
-  </script>
+  const wheelRef = /** @type {Ref<LitRoulette>} */ createRef();
+  /**
+   * @typedef {Object} Item_t
+   * @property {number} id
+   * @property {string} background
+   * @property {string} textColor
+   * @property {string} htmlContent
+   */
+  const items = /** @type Item_t */[
+    { id: 1, background: '#F00', textColor: '#000', htmlContent: 'Text 01' },
+    { id: 2, background: '#0F0', textColor: '#000', htmlContent: 'Text 02' },
+    { id: 3, background: '#00F', textColor: '#000', htmlContent: 'Text 03' },
+    { id: 4, background: '#FFF', textColor: '#000', htmlContent: 'Text 04' },
+    { id: 5, background: '#F00', textColor: '#000', htmlContent: 'Text 05' },
+    { id: 6, background: '#0F0', textColor: '#000', htmlContent: 'Text 06' },
+    { id: 7, background: '#00F', textColor: '#000', htmlContent: 'Text 07' },
+    { id: 8, background: '#FFF', textColor: '#000', htmlContent: 'Text 08' }
+  ];
+
+  const handleClick = (event) => {
+    console.log('handleClick', { event });
+    console.log(wheelRef);
+    wheelRef.value.launchWheel();
+  };
+
+  const handleWheelStart = (event) => {
+    console.log('handleWheelStart', { event });
+  };
+  const handleWheelEnd = (event) => {
+    console.log('handleWheelEnd', { event });
+  };
+
+
+  render(
+    html`
+      <lit-roulette id='wheel'
+                    .items='${items}'
+                    ${ref(wheelRef)}
+                    @click='${() => {
+                      wheelRef.value.launchWheel();
+                    }}'
+                    @wheel-start='${handleWheelStart}'
+                    @wheel-end='${handleWheelEnd}'
+      >
+        Text
+      </lit-roulette>
+
+      <button @click='${handleClick}'>Click</button>
+    `,
+    document.querySelector('#demo0')
+  );
+</script>
+
+<script type='module'>
+  import '../dist/src/lit-roulette.js';
+  import { html, render } from 'lit';
+  import { ref, createRef } from 'lit/directives/ref.js';
+  import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+
+  const wheelRef = /** @type {Ref<LitRoulette>} */ createRef();
+
+
+  const wheelData = {
+    items: [
+      { id: 1, name: 'Burger', htmlContent: '<strong>Burger</strong>', textColor: 'white', background: '#f2831b' },
+      { id: 2, name: 'Veggie', htmlContent: '<strong>Veggie</strong>', textColor: 'white', background: '#37e307' },
+      { id: 3, name: 'Pizza', htmlContent: '<strong>Pizza</strong>', textColor: 'white', background: '#3ab3f0' },
+      { id: 4, name: 'Pokebowl', htmlContent: '<strong>Pokebowl</strong>', textColor: 'white', background: '#f0403a' },
+      { id: 5, name: 'Kebab', htmlContent: '<strong>Kebab</strong>', textColor: 'white', background: '#f2831b' },
+      { id: 6, name: 'Salads', htmlContent: '<strong>Salads</strong>', textColor: 'white', background: '#37e307' },
+      { id: 7, name: 'Japanese', htmlContent: '<strong>Japanese</strong>', textColor: 'white', background: '#3ab3f0' },
+      { id: 8, name: 'Pokebowl', htmlContent: '<strong>Pokebowl</strong>', textColor: 'white', background: '#f0403a' },
+      { id: 9, name: 'Thai', htmlContent: '<strong>Burger</strong>', textColor: 'white', background: '#f2831b' },
+      { id: 10, name: 'Sandwich', htmlContent: '<strong>Sandwich</strong>', textColor: 'white', background: '#37e307' },
+      { id: 11, name: 'French', htmlContent: '<strong>French</strong>', textColor: 'white', background: '#3ab3f0' },
+      { id: 12, name: 'Pasta', htmlContent: '<strong>Pasta</strong>', textColor: 'white', background: '#f0403a' }
+    ],
+    firstItemIndex: { value: 0 },
+    wheelSettings: {
+      centeredIndicator: false,
+      indicatorPosition: 'right',
+      size: 400,
+      displayShadow: true,
+      duration: 8,
+      resultVariation: 70,
+      easing: 'bounce',
+      counterClockwise: false,
+      horizontalContent: false,
+      displayBorder: true,
+      displayIndicator: false,
+      baseDisplay: true,
+      baseSize: 100,
+      baseDisplayShadow: true,
+      baseDisplayIndicator: true,
+      baseBackground: '#444',
+      baseHtmlContent: '<strong>What to<br>eat?</strong>'
+    }
+  };
+
+  const handleWheelStart = (event) => {
+    console.log('handleWheelStart', { event });
+  };
+  const handleWheelEnd = (event) => {
+    console.log('handleWheelEnd', { event });
+  };
+
+
+  render(
+    html`
+      <lit-roulette id='wheel'
+                    ${ref(wheelRef)}
+                    .items='${wheelData.items}'
+                    .firstItemIndex='${wheelData.firstItemIndex}'
+                    .centeredIndicator='${wheelData.wheelSettings.centeredIndicator}'
+                    .indicatorPosition='${wheelData.wheelSettings.indicatorPosition}'
+                    .size='${wheelData.wheelSettings.size}'
+                    .displayShadow='${wheelData.wheelSettings.displayShadow}'
+                    .displayBorder='${wheelData.wheelSettings.displayBorder}'
+                    .displayIndicator='${wheelData.wheelSettings.displayIndicator}'
+                    .duration='${wheelData.wheelSettings.duration}'
+                    .resultVariation='${wheelData.wheelSettings.resultVariation}'
+                    .easing='${wheelData.wheelSettings.easing}'
+                    .counterClockwise='${wheelData.wheelSettings.counterClockwise}'
+                    .horizontalContent='${wheelData.wheelSettings.horizontalContent}'
+                    .baseDisplay='${wheelData.wheelSettings.baseDisplay}'
+                    .baseSize='${wheelData.wheelSettings.baseSize}'
+                    .baseDisplayIndicator='${wheelData.wheelSettings.baseDisplayIndicator}'
+                    .baseDisplayShadow='${wheelData.wheelSettings.baseDisplayShadow}'
+                    .baseBackground='${wheelData.wheelSettings.baseBackground}'
+                    @wheel-start='${handleWheelStart}'
+                    @wheel-end='${handleWheelEnd}'
+                    @click='${() => {
+                      console.log(ref(wheelRef));
+                      wheelRef.value.launchWheel();
+                    }}'
+      >
+        <div style='color: white; text-align: center'>${unsafeHTML(wheelData.wheelSettings.baseHtmlContent)}</div>
+      </lit-roulette>
+    `,
+    document.querySelector('#demo1')
+  );
+</script>
+
+<!--
+<lit-roulette id='wheel-javascript-vanilla'>
+  Text
+</lit-roulette>
+
+<script type='module' src='../dist/src/lit-roulette.js'></script>
+<script>
+  const wheel = document.getElementById('wheel-javascript-vanilla');
+  wheel.items = [
+    { id: 1, background: '#F00', textColor: '#000', htmlContent: 'Text 1' },
+    { id: 2, background: '#0F0', textColor: '#000', htmlContent: 'Text 2' },
+    { id: 3, background: '#00F', textColor: '#000', htmlContent: 'Text 3' },
+  ]
+  wheel.onclick = () => {
+    console.log(wheel);
+    wheel.launchWheel();
+  };
+  wheel.addEventListener('wheel-start', () => {
+    console.log('wheel-start ', wheel);
+  });
+  wheel.addEventListener('wheel-end', () => {
+    console.log('wheel-end ', wheel);
+  });
+</script>-->
 </body>
 
 </html>

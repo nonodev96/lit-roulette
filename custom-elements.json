@@ -13,23 +13,232 @@
           "members": [
             {
               "kind": "field",
-              "name": "header",
-              "type": {
-                "text": "string"
-              },
-              "default": "'Hey there'"
+              "name": "_handleClick",
+              "default": "() => {\n    this.items = [...this.items]\n    console.log(this.items)\n  }"
             },
             {
               "kind": "field",
-              "name": "counter",
+              "name": "items",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "firstItemIndex",
+              "type": {
+                "text": "object"
+              },
+              "default": "{ value: 0 }"
+            },
+            {
+              "kind": "field",
+              "name": "wheelResultIndex",
+              "type": {
+                "text": "object"
+              },
+              "default": "{ value: null }"
+            },
+            {
+              "kind": "field",
+              "name": "centeredIndicator",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "indicatorPosition",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"top\""
+            },
+            {
+              "kind": "field",
+              "name": "size",
               "type": {
                 "text": "number"
               },
-              "default": "5"
+              "default": "300"
+            },
+            {
+              "kind": "field",
+              "name": "displayShadow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "duration",
+              "type": {
+                "text": "number"
+              },
+              "default": "4"
+            },
+            {
+              "kind": "field",
+              "name": "resultVariation",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "easing",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"ease\""
+            },
+            {
+              "kind": "field",
+              "name": "counterClockwise",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "horizontalContent",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "displayBorder",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "displayIndicator",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "baseDisplay",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "baseSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "100"
+            },
+            {
+              "kind": "field",
+              "name": "baseDisplayShadow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "baseDisplayIndicator",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "baseBackground",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"\""
+            },
+            {
+              "kind": "field",
+              "name": "randomIdRoulette",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "itemSelected",
+              "type": {
+                "text": "null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "processingLock",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "itemAngle",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "startingAngle",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "degreesVariation",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "counterClockWiseOperator",
+              "type": {
+                "text": "number"
+              },
+              "default": "1"
             },
             {
               "kind": "method",
-              "name": "__increment"
+              "name": "launchWheel"
+            },
+            {
+              "kind": "method",
+              "name": "reset"
+            }
+          ],
+          "events": [
+            {
+              "name": "wheel-start",
+              "type": {
+                "text": "CustomEvent"
+              }
             }
           ],
           "superclass": {
