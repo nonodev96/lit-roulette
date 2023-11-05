@@ -1,18 +1,25 @@
-# \<lit-roulette>
+# <lit-roulette>
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+
+Hi, I am using the nitocode code as an example to learn about lit and web components.
+
+Acknowledgements for the roulette code to @nitocode 👋
+
+Fork from: [@nitocode/vue3-roulette](https://github.com/nitocode/vue3-roulette)
+
 
 ## Installation
 
 ```bash
-npm i lit-roulette
+npm i @nonodev96/lit-roulette
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import 'lit-roulette/lit-roulette.js';
+  import '@nonodev96/lit-roulette/lit-roulette.js';
 </script>
 
 <lit-roulette></lit-roulette>

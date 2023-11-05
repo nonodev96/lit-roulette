@@ -1,9 +1,9 @@
 {
-  "name": "lit-roulette",
+  "name": "@nonodev96/lit-roulette",
   "description": "Webcomponent lit-roulette following open-wc recommendations",
   "license": "MIT",
-  "author": "lit-roulette",
-  "version": "0.0.0",
+  "author": "@nonodev96",
+  "version": "0.0.1",
   "type": "module",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",

@@ -13,16 +13,11 @@
           "members": [
             {
               "kind": "field",
-              "name": "_handleClick",
-              "default": "() => {\n    this.items = [...this.items]\n    console.log(this.items)\n  }"
-            },
-            {
-              "kind": "field",
               "name": "items",
               "type": {
-                "text": "array"
+                "text": "Array<Item_t>"
               },
-              "default": "[]"
+              "default": "[\n    // { id: 1, background: '#F00', textColor: '#000', htmlContent: 'Text 1' },\n    // { id: 2, background: '#0F0', textColor: '#000', htmlContent: 'Text 2' },\n    // { id: 3, background: '#00F', textColor: '#000', htmlContent: 'Text 3' },\n    // { id: 4, background: '#FFF', textColor: '#000', htmlContent: 'Text 4' }\n  ]"
             },
             {
               "kind": "field",
@@ -54,7 +49,7 @@
               "type": {
                 "text": "string"
               },
-              "default": "\"top\""
+              "default": "'top'"
             },
             {
               "kind": "field",
@@ -94,7 +89,7 @@
               "type": {
                 "text": "string"
               },
-              "default": "\"ease\""
+              "default": "'ease'"
             },
             {
               "kind": "field",
@@ -166,7 +161,15 @@
               "type": {
                 "text": "string"
               },
-              "default": "\"\""
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "containerRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              },
+              "privacy": "private"
             },
             {
               "kind": "field",
@@ -174,14 +177,16 @@
               "type": {
                 "text": "number"
               },
+              "privacy": "private",
               "default": "0"
             },
             {
               "kind": "field",
               "name": "itemSelected",
               "type": {
-                "text": "null"
+                "text": "Item_t | null"
               },
+              "privacy": "private",
               "default": "null"
             },
             {
@@ -190,50 +195,47 @@
               "type": {
                 "text": "boolean"
               },
+              "privacy": "private",
               "default": "false"
             },
             {
               "kind": "field",
               "name": "itemAngle",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
+              "privacy": "private"
             },
             {
               "kind": "field",
               "name": "startingAngle",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
+              "privacy": "private"
             },
             {
               "kind": "field",
               "name": "degreesVariation",
-              "type": {
-                "text": "number"
-              },
-              "default": "0"
+              "privacy": "private"
             },
             {
               "kind": "field",
               "name": "counterClockWiseOperator",
-              "type": {
-                "text": "number"
-              },
-              "default": "1"
+              "privacy": "private"
             },
             {
               "kind": "method",
-              "name": "launchWheel"
+              "name": "launchWheel",
+              "privacy": "public"
             },
             {
               "kind": "method",
-              "name": "reset"
+              "name": "reset",
+              "privacy": "public"
             }
           ],
           "events": [
+            {
+              "name": "wheel-end",
+              "type": {
+                "text": "CustomEvent"
+              }
+            },
             {
               "name": "wheel-start",
               "type": {
@@ -271,6 +273,27 @@
           "declaration": {
             "name": "LitRoulette",
             "module": "./LitRoulette.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/lit-roulette.styles.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "litRouletteStyles",
+          "default": "css`\n  .wheel-container,\n  .wheel-base,\n  .wheel-base-container,\n  .wheel-base-indicator {\n    font-family: Ubuntu, sans-serif;\n    transition: transform 1s ease-in-out;\n  }\n\n  .wheel-container {\n    position: relative;\n    display: inline-block;\n    overflow: hidden;\n    border-radius: 50%;\n    cursor: pointer;\n  }\n\n  .wheel-container-indicator:before {\n    content: '';\n    position: absolute;\n    z-index: 4;\n    width: 0;\n    height: 0;\n    border-left: 20px solid transparent;\n    border-right: 20px solid transparent;\n    border-top: 20px solid black;\n    transform: translateX(-50%);\n  }\n\n  .wheel-container.indicator-top {\n    transform: rotate(0deg);\n  }\n\n  .wheel-container.indicator-right {\n    transform: rotate(90deg);\n  }\n\n  .wheel-container.indicator-right .wheel-base {\n    transform: rotate(-90deg);\n  }\n\n  .wheel-container.indicator-bottom {\n    transform: rotate(180deg);\n  }\n\n  .wheel-container.indicator-bottom .wheel-base {\n    transform: rotate(-180deg);\n  }\n\n  .wheel-container.indicator-left {\n    transform: rotate(270deg);\n  }\n\n  .wheel-container.indicator-left .wheel-base {\n    transform: rotate(-270deg);\n  }\n\n  .wheel-container-border {\n    border: 8px solid black;\n  }\n\n  .wheel-container-shadow {\n    box-shadow: 5px 5px 15px -5px #000;\n  }\n\n  .wheel-base-container {\n    position: absolute;\n    z-index: 2;\n    top: 50%;\n    left: 50%;\n    border-radius: 50%;\n    border: 5px solid black;\n    transform: translate(-50%, -50%);\n  }\n\n  .wheel-base-container-shadow {\n    box-shadow: 5px 5px 15px -5px #000;\n  }\n\n  .wheel-base-container .wheel-base {\n    position: absolute;\n    z-index: 2;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    overflow: hidden;\n    width: 100%;\n    height: 100%;\n    border-radius: 50%;\n  }\n\n  .wheel-base-container .wheel-base-indicator {\n    position: absolute;\n    z-index: 1;\n    width: 100%;\n    height: 100%;\n    text-align: center;\n  }\n\n  .wheel-base-container .wheel-base-indicator:before {\n    content: '';\n    position: absolute;\n    z-index: 1;\n    top: -20px;\n    width: 0;\n    height: 0;\n    border-left: 20px solid transparent;\n    border-right: 20px solid transparent;\n    border-bottom: 20px solid black;\n    transform: translateX(-50%);\n  }\n\n  .wheel {\n    background: white;\n    border-radius: 50%;\n    margin: auto;\n    overflow: hidden;\n  }\n\n  .wheel.easing-ease {\n    transition: transform cubic-bezier(0.65, 0, 0.35, 1);\n  }\n\n  .wheel.easing-bounce {\n    transition: transform cubic-bezier(0.49, 0.02, 0.52, 1.12);\n  }\n\n  .wheel-border:after {\n    content: '';\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    left: 0;\n    top: 0;\n    z-index: 3;\n    border-radius: 50%;\n    background-image: linear-gradient(\n      to left,\n      black 33%,\n      rgba(255, 255, 255, 0) 0%\n    );\n    background-position: bottom;\n    background-size: 3px 1px;\n    -webkit-mask: radial-gradient(circle, transparent 65%, #000 66%);\n    mask: radial-gradient(transparent 65%, #000 66%);\n  }\n\n  .wheel-item {\n    overflow: hidden;\n    position: absolute;\n    top: 0;\n    right: 0;\n    width: 50%;\n    height: 50%;\n    transform-origin: 0% 100%;\n    border: 1px solid black;\n  }\n\n  .wheel-item:nth-child(odd) {\n    background-color: skyblue;\n  }\n\n  .wheel-item:nth-child(even) {\n    background-color: pink;\n  }\n\n  .wheel .content {\n    position: absolute;\n    left: -100%;\n    width: 200%;\n    height: 200%;\n    text-align: center;\n    transform: skewY(30deg) rotate(0deg);\n    padding-top: 20px;\n  }\n\n  .wheel .content.horizontal-content {\n    left: initial;\n    right: 100%;\n    width: 50%;\n    height: 250%;\n    text-align: right;\n  }\n\n  .wheel .content.horizontal-content span {\n    display: block;\n    transform: rotate(270deg);\n  }\n`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "litRouletteStyles",
+          "declaration": {
+            "name": "litRouletteStyles",
+            "module": "src/lit-roulette.styles.ts"
           }
         }
       ]
